@@ -9,11 +9,9 @@ mydates <- as.Date(c("2007-02-01", "2007-02-02"))  # define dates for which to g
 power <- read.table("../household_power_consumption.txt", sep=";", header=TRUE)[as.Date(read.table("../household_power_consumption.txt", sep=";", header=TRUE)$Date,  "%d/%m/%Y") %in% mydates,]
 
 ##  draw graph and save to png
-
-par(bg=NA, mfrow=c(1,1))  # set background to transparent
 graph_dates <- with(power[power$Date !="?" & power$Time !="?" & power$Sub_metering_1 !="?" & power$Sub_metering_2 !="?" & power$Sub_metering_3 !="?",], dmy_hms(paste(Date, Time, sep=" ")))
-
 png(file="plot3.png", width=480, height=480, bg="transparent")
+par(bg=NA, mfrow=c(1,1))  # set background to transparent
 with(power[power$Date !="?" & power$Time !="?" & power$Sub_metering_1 !="?" & power$Sub_metering_2 !="?" & power$Sub_metering_3 !="?",], plot(graph_dates, as.numeric(as.character(Sub_metering_1)), type="l", col="black", main=NA, xlab=NA, ylab="Energy sub metering"))
 with(power[power$Date !="?" & power$Time !="?" & power$Sub_metering_1 !="?" & power$Sub_metering_2 !="?" & power$Sub_metering_3 !="?",], lines(graph_dates, as.numeric(as.character(Sub_metering_2)), col="red"))
 with(power[power$Date !="?" & power$Time !="?" & power$Sub_metering_1 !="?" & power$Sub_metering_2 !="?" & power$Sub_metering_3 !="?",], lines(graph_dates, as.numeric(as.character(Sub_metering_3)), col="blue"))
