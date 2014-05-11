@@ -8,6 +8,6 @@ power <- read.table("household_power_consumption.txt", sep=";", header=TRUE)[as.
 ##  draw graph and save to png
 
 par(bg=NA)  # set background to transparent
-hist(as.numeric(as.character(power$Global_active_power[power$Global_active_power!="?"])), col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")  # draw histogram
+hist(as.numeric(as.character(power$Global_active_power[power$Global_active_power!="?"])), col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")  # draw graph
 dev.copy(png, file="plot1.png", width=480, height=480)  # save to file 
 dev.off()  # and close device
