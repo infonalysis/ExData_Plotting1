@@ -10,11 +10,13 @@ power <- read.table("../household_power_consumption.txt", sep=";", header=TRUE)[
 
 ##  draw graph and save to png
 
-par(bg=NA)  # set background to transparent
+par(bg=NA, mfrow=c(1,1))  # set background to transparent
 graph_dates <- with(power[power$Date !="?" & power$Time !="?" & power$Sub_metering_1 !="?" & power$Sub_metering_2 !="?" & power$Sub_metering_3 !="?",], dmy_hms(paste(Date, Time, sep=" ")))
+
+png(file="plot3.png", width=480, height=480, bg="transparent")
 with(power[power$Date !="?" & power$Time !="?" & power$Sub_metering_1 !="?" & power$Sub_metering_2 !="?" & power$Sub_metering_3 !="?",], plot(graph_dates, as.numeric(as.character(Sub_metering_1)), type="l", col="black", main=NA, xlab=NA, ylab="Energy sub metering"))
 with(power[power$Date !="?" & power$Time !="?" & power$Sub_metering_1 !="?" & power$Sub_metering_2 !="?" & power$Sub_metering_3 !="?",], lines(graph_dates, as.numeric(as.character(Sub_metering_2)), col="red"))
 with(power[power$Date !="?" & power$Time !="?" & power$Sub_metering_1 !="?" & power$Sub_metering_2 !="?" & power$Sub_metering_3 !="?",], lines(graph_dates, as.numeric(as.character(Sub_metering_3)), col="blue"))
-legend("topright", lty=c(1,1), cex=1, col=c("black", "red", "blue"), legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
-dev.copy(png, file="plot3.png", width=480, height=480)  # save to file 
+legend("topright", lty=c(1,1), xjust=0, col=c("black", "red", "blue"), legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+## dev.copy(png, file="plot3.png", width=480, height=480)  # save to file 
 dev.off()  # and close device
