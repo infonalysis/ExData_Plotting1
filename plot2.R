@@ -6,7 +6,7 @@ library(lubridate)
 
 ##  set up data
 mydates <- as.Date(c("2007-02-01", "2007-02-02"))  # define dates for which to graph measurements
-power <- read.table("../household_power_consumption.txt", sep=";", header=TRUE)[as.Date(read.table("../household_power_consumption.txt", sep=";", header=TRUE)$Date,  "%d/%m/%Y") %in% mydates,]
+power <- read.table("household_power_consumption.txt", sep=";", header=TRUE)[as.Date(read.table("household_power_consumption.txt", sep=";", header=TRUE)$Date,  "%d/%m/%Y") %in% mydates,]
 
 ##  draw graph and save to png
 graph_dates <- with(power[power$Date !="?" & power$Time !="?" & power$Global_active_power !="?",], dmy_hms(paste(Date, Time, sep=" ")))
